@@ -3,14 +3,20 @@ import isStatelessComponent from './isStatelessComponent';
 export default function ({ Plugin, types: t }) {
   return {
     visitor: {
-      Program(path) {
+      Program(path, state) {
+        //look at plugin options, rip otu any false-y options, keep the truth-y.
+        const truthyStateOpts = Object.keys(state.opts).reduce(function(prev, curr) {
+                                  if (state.opts[curr]) prev[curr] = state.opts[curr];
+                                  return prev;
+                              }, {});
+        //take truthy state opts object and turn it into an array of keys.
+        const truthyOptKeys = Object.keys(truthyStateOpts);
         // On program start, do an explicit traversal up front for this plugin.
         path.traverse({
           ObjectProperty: {
             exit(path) {
               const node = path.node;
-
-              if (node.computed || node.key.name !== 'propTypes') {
+              if (node.computed || truthyOptKeys.indexOf(node.key.name) < 0) {
                 return;
               }
 
@@ -33,7 +39,7 @@ export default function ({ Plugin, types: t }) {
               scope,
             } = path;
 
-            if (node.key.name === 'propTypes') {
+            if (truthyOptKeys.indexOf(node.key.name) >= 0) {
               let className = scope.block.id.name;
               let binding = scope.getBinding(className);
               let superClass = binding.path.get('superClass');
@@ -57,7 +63,7 @@ export default function ({ Plugin, types: t }) {
               scope,
             } = path;
 
-            if (node.left.computed || !node.left.property || node.left.property.name !== 'propTypes') {
+            if (node.left.computed || !node.left.property || truthyOptKeys.indexOf(node.left.property.name) < 0) {
               return;
             }
 
@@ -76,9 +82,9 @@ export default function ({ Plugin, types: t }) {
             } else if (isStatelessComponent(binding.path)) {
               path.remove();
             }
-          },
+          }
         });
-      },
-    },
+      }
+    }
   };
 }

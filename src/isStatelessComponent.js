@@ -31,7 +31,7 @@ function isReturningJSXElement(path) {
           visited = true;
         }
       }
-    },
+    }
   });
 
   return visited;
@@ -39,7 +39,7 @@ function isReturningJSXElement(path) {
 
 const validPossibleStatelessComponentTypes = [
   'VariableDeclarator',
-  'FunctionDeclaration',
+  'FunctionDeclaration'
 ];
 
 /**
