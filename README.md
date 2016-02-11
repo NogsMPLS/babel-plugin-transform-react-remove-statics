@@ -16,8 +16,7 @@ This can be particularly useful if you want to switch certain statics on/off for
   "env": {
     "production": {
       "plugins": ["transform-react-remove-statics", {
-        "propTypes": true,
-        "styleguide": false
+        "propTypes": true
     }]
   }
 }
