@@ -15,9 +15,12 @@ This can be particularly useful if you want to switch certain statics on/off for
 {
   "env": {
     "production": {
-      "plugins": ["transform-react-remove-statics", {
-        "propTypes": true
-    }]
+      "plugins": [
+        ["transform-react-remove-statics", {
+          "propTypes": true
+        }]
+      ]
+    }
   }
 }
 ```
@@ -25,9 +28,11 @@ This can be particularly useful if you want to switch certain statics on/off for
 
 ```js
 require("babel-core").transform("code", {
-  plugins: ["transform-react-remove-statics", {
-    "propTypes": true
-  }]
+  plugins: [
+    ["transform-react-remove-statics", {
+      "propTypes": true
+    }]
+  ]
 });
 ```
 
