@@ -64,4 +64,5 @@ MIT
 ## Thanks
 
 This project was originally a fork of [Babel Plugin Transform React Remove PropTypes](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types), by [oliviertassinari](https://github.com/oliviertassinari), which is  in turn a fork of [Babel Plugin React Remove PropTypes](https://github.com/nkt/babel-plugin-react-remove-prop-types)  by [nkt](https://github.com/nkt).
+
 Thank you [nkt](https://github.com/nkt) and [oliviertassinari](https://github.com/oliviertassinari) for letting em stand on your shoulders.
