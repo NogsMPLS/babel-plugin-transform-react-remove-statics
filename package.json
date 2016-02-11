@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-react-remove-statics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Remove unnecessary statics attached to React components for different build environments",
   "main": "lib/index.js",
   "scripts": {
