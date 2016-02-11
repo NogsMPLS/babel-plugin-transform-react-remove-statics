@@ -3,11 +3,12 @@
 Remove unnecessary statics attached to React components for different build environments
 
 ## Usage
+Set the statics you want via babel configuration with boolean.
+
+This can be particularly useful if you want to switch certain statics on/off for certain environments. An example of this would be using something like [react-styleguide-generator-alt](https://github.com/theogravity/react-styleguide-generator-alt) for your documentation. Since that tool requires you to attach a static ```styleguide``` to your components, you probably would want to remove it in production. But you would probably want to keep it to actually build your doc server, and then remove PropTypes still. This babel plugin gives you that flexibility.
 
 ### Via `.babelrc` (Recommended)
 Simply pass in the name of the static you want removed during build and set a boolean. If true, the static will be removed, if false, the static will stay attached to the component.
-
-This can be particularly useful if you want to switch certain statics on/off for certain environments. An example of this would be using something like [react-styleguide-generator-alt](https://github.com/theogravity/react-styleguide-generator-alt) for your documentation. Since that tool requires you to attach a static ```styleguide``` to your components, you probably would want to remove it in production. But you would probably want to keep it to actually build your doc server, and then remove PropTypes still. This babel plugin gives you that flexibility.
 
 **.babelrc**
 
