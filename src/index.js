@@ -43,7 +43,6 @@ export default function ({ Plugin, types: t }) {
               let className = scope.block.id.name;
               let binding = scope.getBinding(className);
               let superClass = binding.path.get('superClass');
-
               if (superClass.matchesPattern('React.Component') || superClass.node.name === 'Component') {
                 path.remove();
               } else if (superClass.node.name) { // Check for inheritance
@@ -77,6 +76,8 @@ export default function ({ Plugin, types: t }) {
             if (binding.path.isClassDeclaration()) {
               const superClass = binding.path.get('superClass');
               if (superClass.matchesPattern('React.Component') || superClass.matchesPattern('Component')) {
+                path.remove();
+              } else if (superClass.node.name === 'Component') {
                 path.remove();
               }
             } else if (isStatelessComponent(binding.path)) {
