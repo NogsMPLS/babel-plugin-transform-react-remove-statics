@@ -1,5 +1,7 @@
 "use strict";
 
+var _react = require("react");
+
 var Foo1 = function Foo1() {
   return React.createElement("div", null);
 };
@@ -64,4 +66,8 @@ function Foo8() {
 
 var Foo9 = function Foo9() {
   return React.createElement("div", null);
+};
+
+var Foo10 = function Foo10() {
+  return (0, _react.createElement)("div", null);
 };

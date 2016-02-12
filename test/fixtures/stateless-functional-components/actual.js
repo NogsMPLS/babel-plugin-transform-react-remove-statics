@@ -1,3 +1,5 @@
+import { createElement } from 'react';
+
 const Foo1 = () => (
   <div />
 );
@@ -97,5 +99,13 @@ const Foo9 = () => {
 };
 
 Foo9.propTypes = {
+  foo: React.PropTypes.string
+};
+
+const Foo10 = () => {
+  return createElement("div", null);
+};
+
+Foo10.propTypes = {
   foo: React.PropTypes.string
 };
