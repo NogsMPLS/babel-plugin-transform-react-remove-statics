@@ -22,7 +22,7 @@ function isReturningJSXElement(path) {
       } else if (argument.node.type === 'CallExpression') {
 
         const { node } = argument.get('callee');
-        if (node.object.name === 'React' && node.property.name === 'createElement') {
+        if (node.name === 'createElement' || node.object.name === 'React' && node.property.name === 'createElement') {
           visited = true;
         }
 
