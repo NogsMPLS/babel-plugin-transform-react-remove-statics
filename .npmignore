@@ -2,6 +2,7 @@ node_modules/
 npm-debug.log
 coverage/
 test/
+src/
 
 # IDE
 *.sublime-project
