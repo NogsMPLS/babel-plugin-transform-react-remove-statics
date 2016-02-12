@@ -1,8 +1,22 @@
+function isJSXElementOrReactCreateElement(node) {
+  if (node.type === 'JSXElement') {
+    return true;
+  }
+  if (node.callee && node.callee.object && node.callee.object.name === 'React' && node.callee.property && node.callee.property.name === 'createElement') {
+    return true;
+  }
+
+  if (node.callee && node.callee.name === 'createElement') {
+    return true;
+  }
+  return false;
+}
+
 function isReturningJSXElement(path) {
   /**
    * Early exit for ArrowFunctionExpressions, there is no ReturnStatement node.
    */
-  if (path.node.init && path.node.init.body && path.node.init.body.type === 'JSXElement') {
+  if (path.node.init && path.node.init.body && isJSXElementOrReactCreateElement(path.node.init.body)) {
     return true;
   }
 
@@ -17,16 +31,14 @@ function isReturningJSXElement(path) {
 
       const argument = path2.get('argument');
 
-      if (argument.node.type === 'JSXElement') {
+      if (isJSXElementOrReactCreateElement(argument.node)) {
         visited = true;
-      } else if (argument.node.type === 'CallExpression') {
+        return;
+      }
 
-        const { node } = argument.get('callee');
-        if (node.name === 'createElement' || node.object.name === 'React' && node.property.name === 'createElement') {
-          visited = true;
-        }
-
-        const binding = path.scope.getBinding(node.name);
+      if (argument.node.type === 'CallExpression') {
+        const name = argument.get('callee').node.name;
+        const binding = path.scope.getBinding(name);
 
         if (!binding) {
           return;
@@ -36,7 +48,7 @@ function isReturningJSXElement(path) {
           visited = true;
         }
       }
-    }
+    },
   });
 
   return visited;
