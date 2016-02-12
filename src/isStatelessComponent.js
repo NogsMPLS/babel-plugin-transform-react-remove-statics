@@ -21,13 +21,12 @@ function isReturningJSXElement(path) {
         visited = true;
       } else if (argument.node.type === 'CallExpression') {
 
-        const node = argument.get('callee').node;
+        const { node } = argument.get('callee');
         if (node.object.name === 'React' && node.property.name === 'createElement') {
           visited = true;
         }
 
-        const name = argument.get('callee').node.name;
-        const binding = path.scope.getBinding(name);
+        const binding = path.scope.getBinding(node.name);
 
         if (!binding) {
           return;
